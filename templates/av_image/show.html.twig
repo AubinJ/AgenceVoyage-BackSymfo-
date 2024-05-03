@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}AvImage{% endblock %}
+
+{% block body %}
+    <h1>AvImage</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ av_image.id }}</td>
+            </tr>
+            <tr>
+                <th>Url</th>
+                <td>{{ av_image.url }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_av_image_index') }}">back to list</a>
+
+    <a href="{{ path('app_av_image_edit', {'id': av_image.id}) }}">edit</a>
+
+    {{ include('av_image/_delete_form.html.twig') }}
+{% endblock %}

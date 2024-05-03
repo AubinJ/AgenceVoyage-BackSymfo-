@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit AvVoyage{% endblock %}
+
+{% block body %}
+    <h1>Edit AvVoyage</h1>
+
+    {{ include('av_voyage/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_voyage_index') }}">back to list</a>
+
+    {{ include('av_voyage/_delete_form.html.twig') }}
+{% endblock %}

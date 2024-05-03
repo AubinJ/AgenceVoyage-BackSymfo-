@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}AvImage index{% endblock %}
+
+{% block body %}
+    <h1>AvImage index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Url</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for av_image in av_images %}
+            <tr>
+                <td>{{ av_image.id }}</td>
+                <td>{{ av_image.url }}</td>
+                <td>
+                    <a href="{{ path('app_av_image_show', {'id': av_image.id}) }}">show</a>
+                    <a href="{{ path('app_av_image_edit', {'id': av_image.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_av_image_new') }}">Create new</a>
+{% endblock %}

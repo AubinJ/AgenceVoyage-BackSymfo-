@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}AvPays index{% endblock %}
+
+{% block body %}
+    <h1>AvPays index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for av_pay in av_pays %}
+            <tr>
+                <td>{{ av_pay.id }}</td>
+                <td>{{ av_pay.nom }}</td>
+                <td>
+                    <a href="{{ path('app_av_pays_show', {'id': av_pay.id}) }}">show</a>
+                    <a href="{{ path('app_av_pays_edit', {'id': av_pay.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_av_pays_new') }}">Create new</a>
+{% endblock %}
