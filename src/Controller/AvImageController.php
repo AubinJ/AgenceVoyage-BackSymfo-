@@ -10,7 +10,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
+#[IsGranted('ROLE_USER', statusCode: 423, message: "Vous n'avez pas les droits pour accéder à cette page, veuillez vous connecter via l'onglet login.")]
 #[Route('/av/image')]
 class AvImageController extends AbstractController
 {
@@ -32,6 +34,8 @@ class AvImageController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($avImage);
             $entityManager->flush();
+
+            $this->addFlash('success', 'Votre image a bien été ajoutée !');
 
             return $this->redirectToRoute('app_av_image_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -59,6 +63,7 @@ class AvImageController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
+            $this->addFlash('success', 'Votre image a bien été modifiée !');
             return $this->redirectToRoute('app_av_image_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -75,7 +80,7 @@ class AvImageController extends AbstractController
             $entityManager->remove($avImage);
             $entityManager->flush();
         }
-
+        $this->addFlash('success', 'Votre image a bien été supprimée !');
         return $this->redirectToRoute('app_av_image_index', [], Response::HTTP_SEE_OTHER);
     }
 }

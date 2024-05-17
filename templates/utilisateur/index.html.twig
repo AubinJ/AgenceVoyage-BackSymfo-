@@ -3,15 +3,13 @@
 {% block title %}Utilisateur index{% endblock %}
 
 {% block body %}
-    <h1>Utilisateur index</h1>
+    <h1>Gestion des utilisateurs</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Email</th>
-                <th>Roles</th>
-                <th>Password</th>
+                <th>Rôles</th>
                 <th>Prenom</th>
                 <th>Nom</th>
                 <th>actions</th>
@@ -20,15 +18,14 @@
         <tbody>
         {% for utilisateur in utilisateurs %}
             <tr>
-                <td>{{ utilisateur.id }}</td>
                 <td>{{ utilisateur.email }}</td>
                 <td>{{ utilisateur.roles ? utilisateur.roles|json_encode : '' }}</td>
-                <td>{{ utilisateur.password }}</td>
                 <td>{{ utilisateur.prenom }}</td>
                 <td>{{ utilisateur.nom }}</td>
                 <td>
-                    <a href="{{ path('app_utilisateur_show', {'id': utilisateur.id}) }}">show</a>
-                    <a href="{{ path('app_utilisateur_edit', {'id': utilisateur.id}) }}">edit</a>
+                    <a href="{{ path('app_utilisateur_show', {'id': utilisateur.id}) }}" class="btn btn-success">Voir</a>
+                    <a href="{{ path('app_utilisateur_edit', {'id': utilisateur.id}) }}" class="btn btn-warning">Modifier</a>
+                    <a href="{{ path('app_utilisateur_delete', {'id': utilisateur.id}) }}" class="btn btn-danger mt-6">Supprimer</a>
                 </td>
             </tr>
         {% else %}
@@ -39,5 +36,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_utilisateur_new') }}">Create new</a>
+    <a href="{{ path('app_utilisateur_new') }}">Créer un nouveau utilisateur</a>
 {% endblock %}

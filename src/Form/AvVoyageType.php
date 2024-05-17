@@ -27,22 +27,21 @@ class AvVoyageType extends AbstractType
                 'widget' => 'single_text',
             ])
             ->add('AvCategorie', EntityType::class, [
+                'label' => 'Categorie',
                 'class' => AvCategorie::class,
-                'choice_label' => 'id',
+                'choice_label' => 'nom',
                 'multiple' => true,
             ])
             ->add('AvPays', EntityType::class, [
+                'label' => 'Pays',
                 'class' => AvPays::class,
-                'choice_label' => 'id',
+                'choice_label' => 'nom',
             ])
             ->add('AvImage', EntityType::class, [
+                'label' => 'Image',
                 'class' => AvImage::class,
-                'choice_label' => 'id',
+                'choice_label' => 'nom',
                 'multiple' => true,
-            ])
-            ->add('UtilisateurGereVoyage', EntityType::class, [
-                'class' => Utilisateur::class,
-                'choice_label' => 'id',
             ])
         ;
     }

@@ -18,6 +18,7 @@ class AvCategorie
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups('api_trips_show')]
     private ?string $nom = null;
 
     /**

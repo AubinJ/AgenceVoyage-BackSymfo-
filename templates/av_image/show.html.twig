@@ -3,7 +3,7 @@
 {% block title %}AvImage{% endblock %}
 
 {% block body %}
-    <h1>AvImage</h1>
+    <h1>Ensemble des images</h1>
 
     <table class="table">
         <tbody>
@@ -18,9 +18,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_av_image_index') }}">back to list</a>
-
-    <a href="{{ path('app_av_image_edit', {'id': av_image.id}) }}">edit</a>
+    <a href="{{ path('app_av_image_edit', {'id': av_image.id}) }}" class= 'btn btn-warning mb-2'>Modifier</a>
 
     {{ include('av_image/_delete_form.html.twig') }}
+
+    <a href="{{ path('app_av_image_index') }}">retour à la liste</a>
 {% endblock %}

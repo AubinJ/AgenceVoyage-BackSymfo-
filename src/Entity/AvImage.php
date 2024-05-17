@@ -6,6 +6,7 @@ use App\Repository\AvImageRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: AvImageRepository::class)]
 class AvImage
@@ -16,6 +17,7 @@ class AvImage
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups('api_trips_show')]
     private ?string $url = null;
 
     /**
@@ -23,6 +25,10 @@ class AvImage
      */
     #[ORM\ManyToMany(targetEntity: AvVoyage::class, mappedBy: 'AvImage')]
     private Collection $VoyageAImage;
+
+    #[ORM\Column(length: 255)]
+    #[Groups('api_trips_show')]
+    private ?string $nom = null;
 
     public function __construct()
     {
@@ -69,6 +75,18 @@ class AvImage
         if ($this->VoyageAImage->removeElement($voyageAImage)) {
             $voyageAImage->removeAvImage($this);
         }
+
+        return $this;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): static
+    {
+        $this->nom = $nom;
 
         return $this;
     }

@@ -7,6 +7,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: AvVoyageRepository::class)]
 class AvVoyage
@@ -14,36 +16,49 @@ class AvVoyage
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups('api_trips_show')]
     private ?int $id = null;
 
+    #[Assert\Length(min: 3, minMessage: "Le nom doit faire au minimum 3 caractères", max: 50, maxMessage: "Le nom ne peut dépasser 50 caractères.")]
     #[ORM\Column(length: 255)]
+    #[Groups('api_trips_show')]
     private ?string $nom = null;
 
+    #[Assert\Length(min: 10, minMessage: "La description doit faire au minimum 10 caractères")]
     #[ORM\Column(length: 255)]
+    #[Groups('api_trips_show')]
     private ?string $description = null;
 
+    #[Assert\Type(type: "numeric", message: "Le champ doit contenir un nombre.")]
+    #[Assert\Positive(message: 'Le prix doit être une valeur positif.')]
     #[ORM\Column(length: 255)]
+    #[Groups('api_trips_show')]
     private ?string $prix = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Groups('api_trips_show')]
     private ?\DateTimeInterface $debut = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[ORM\Column(type: Types::DATE_MUTABLE)]    
+    #[Groups('api_trips_show')]
     private ?\DateTimeInterface $fin = null;
 
     /**
      * @var Collection<int, AvCategorie>
      */
     #[ORM\ManyToMany(targetEntity: AvCategorie::class, inversedBy: 'VoyageACategorie')]
+    #[Groups('api_trips_show')]
     private Collection $AvCategorie;
 
     #[ORM\ManyToOne(inversedBy: 'VoyageAPays')]
+    #[Groups('api_trips_show')]
     private ?AvPays $AvPays = null;
-
+    
     /**
      * @var Collection<int, AvImage>
      */
     #[ORM\ManyToMany(targetEntity: AvImage::class, inversedBy: 'VoyageAImage')]
+    #[Groups('api_trips_show')]
     private Collection $AvImage;
 
     /**

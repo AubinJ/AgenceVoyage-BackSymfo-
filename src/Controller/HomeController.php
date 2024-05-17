@@ -12,7 +12,7 @@ use Symfony\Component\Mime\Email;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/home', name: 'app_home')]
+#[Route('/home', name: 'app_home_')]
 class HomeController extends AbstractController
 {
     #[Route('', name: 'dashboard')]

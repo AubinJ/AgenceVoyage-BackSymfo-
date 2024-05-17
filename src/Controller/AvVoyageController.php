@@ -10,7 +10,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
+#[IsGranted('ROLE_USER', statusCode: 423, message: "Vous n'avez pas les droits pour accéder à cette page, veuillez vous connecter via l'onglet login.")]
 #[Route('/voyage', name: "app_voyage_")]
 class AvVoyageController extends AbstractController
 {
@@ -19,6 +21,7 @@ class AvVoyageController extends AbstractController
     {
         return $this->render('av_voyage/index.html.twig', [
             'av_voyages' => $avVoyageRepository->findAll(),
+            
         ]);
     }
 
@@ -32,8 +35,8 @@ class AvVoyageController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($avVoyage);
             $entityManager->flush();
-
-            return $this->redirectToRoute('app_av_voyage_index', [], Response::HTTP_SEE_OTHER);
+            $this->addFlash('success', 'Votre voyage a bien été créé !');
+            return $this->redirectToRoute('app_voyage_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('av_voyage/new.html.twig', [
@@ -59,7 +62,9 @@ class AvVoyageController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_av_voyage_index', [], Response::HTTP_SEE_OTHER);
+            $this->addFlash('success', 'Votre voyage a bien été modifié !');
+
+            return $this->redirectToRoute('app_voyage_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('av_voyage/edit.html.twig', [
@@ -75,7 +80,7 @@ class AvVoyageController extends AbstractController
             $entityManager->remove($avVoyage);
             $entityManager->flush();
         }
-
-        return $this->redirectToRoute('app_av_voyage_index', [], Response::HTTP_SEE_OTHER);
+        $this->addFlash('success', 'Votre voyage a bien été supprimé !');
+        return $this->redirectToRoute('app_voyage_index', [], Response::HTTP_SEE_OTHER);
     }
 }

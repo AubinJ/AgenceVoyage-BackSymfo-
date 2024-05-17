@@ -6,6 +6,7 @@ use App\Repository\AvPaysRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: AvPaysRepository::class)]
 class AvPays
@@ -16,6 +17,7 @@ class AvPays
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups('api_trips_show')]
     private ?string $nom = null;
 
     /**

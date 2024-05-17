@@ -3,13 +3,13 @@
 {% block title %}AvImage index{% endblock %}
 
 {% block body %}
-    <h1>AvImage index</h1>
+    <h1>Gestion des images</h1>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Url</th>
+                <th>Nom</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -17,10 +17,11 @@
         {% for av_image in av_images %}
             <tr>
                 <td>{{ av_image.id }}</td>
-                <td>{{ av_image.url }}</td>
+                <td>{{ av_image.nom }}</td>
                 <td>
-                    <a href="{{ path('app_av_image_show', {'id': av_image.id}) }}">show</a>
-                    <a href="{{ path('app_av_image_edit', {'id': av_image.id}) }}">edit</a>
+                    <a href="{{ path('app_av_image_show', {'id': av_image.id}) }}" class="btn btn-success">Voir</a>
+                    <a href="{{ path('app_av_image_edit', {'id': av_image.id}) }}" class="btn btn-warning">Modifier</a>
+                    <a href="{{ path('app_av_image_delete', {'id': av_image.id}) }}" class="btn btn-danger">Supprimer</a>
                 </td>
             </tr>
         {% else %}
@@ -31,5 +32,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_av_image_new') }}">Create new</a>
+    <a href="{{ path('app_av_image_new') }}">Ajouter une nouvelle image</a>
 {% endblock %}

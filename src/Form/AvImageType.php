@@ -15,11 +15,7 @@ class AvImageType extends AbstractType
     {
         $builder
             ->add('url')
-            ->add('VoyageAImage', EntityType::class, [
-                'class' => AvVoyage::class,
-                'choice_label' => 'id',
-                'multiple' => true,
-            ])
+            ->add('nom')
         ;
     }
 
